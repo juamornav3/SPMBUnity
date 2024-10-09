@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mario : MonoBehaviour
 {
-
+        
         public float moveSpeed = 5f; // Velocidad de movimiento horizontal
         public float jumpForce = 10f; // Fuerza del salto
         public LayerMask groundLayer; // Capas que serán consideradas como suelo
@@ -23,12 +23,13 @@ public class Mario : MonoBehaviour
 
         void Start()
         {
+            
             rb = GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
         }
 
         void Update()
-        {
+        { 
             // Detectar el input horizontal (izquierda/derecha)
             moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -50,7 +51,7 @@ public class Mario : MonoBehaviour
             }
 
             // Saltar si el jugador está en el suelo o dentro del Coyote Time
-            if ((isGrounded || coyoteTimeCounter > 0f) && Input.GetButtonDown("Jump"))
+            if ((coyoteTimeCounter > 0f) && Input.GetButtonDown("Jump"))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
