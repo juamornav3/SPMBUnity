@@ -7,10 +7,7 @@ public class DeathTrigger : MonoBehaviour
     private Animator objectAnimator;
     private Rigidbody2D objectRigidbody;
 
-    void Start()
-    {
-       
-    }
+   
 
     // Este método se llama cuando un objeto con el tag "Player" o "Enemy" entra en contacto con el collider del precipicio
     private void OnTriggerEnter2D(Collider2D collision)

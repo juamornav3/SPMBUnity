@@ -54,7 +54,10 @@ public class Mario : MonoBehaviour
     private Animator animator;
     private int previousDirection = 0; // Dirección anterior del personaje
 
-   
+    [Header("Estado de Invulnerabilidad")]
+    public bool isInvulnerable = false; // Define si Mario es invulnerable
+    private float invulnerabilityDuration = 0.2f; // Duración de la invulnerabilidad
+    private float invulnerabilityTimer = 0f;
 
     void Start()
     {
@@ -71,12 +74,28 @@ public class Mario : MonoBehaviour
         PlayerMovement();
         HandleJumpPhysics();
 
+        if (isInvulnerable)
+        {
+            invulnerabilityTimer += Time.deltaTime;
+            if (invulnerabilityTimer >= invulnerabilityDuration)
+            {
+                isInvulnerable = false;
+                invulnerabilityTimer = 0f;
+            }
+        }
+
+
         // Calcular el borde izquierdo de la pantalla basado en la posición de la cámara
         float cameraLeftEdge = mainCamera.transform.position.x - mainCamera.orthographicSize * mainCamera.aspect;
         leftScreenLimit = cameraLeftEdge; // Actualizar el límite izquierdo
     }
 
-    
+    public void TriggerInvulnerability()
+    {
+        isInvulnerable = true;
+        invulnerabilityTimer = 0f;
+    }
+
 
     public void Rebote()
     {
